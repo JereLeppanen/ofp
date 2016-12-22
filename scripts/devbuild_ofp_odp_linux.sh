@@ -5,7 +5,7 @@ set -ex
 export ROOTDIR=$(git rev-parse --show-toplevel)
 
 cd $ROOTDIR
-git clone https://git.linaro.org/lng/odp.git
+git clone http://git.linaro.org/lng/odp.git
 cd odp
 git checkout tags/v1.11.0.0_monarch
 ./bootstrap
@@ -16,7 +16,7 @@ make install
 
 cd $ROOTDIR
 ./bootstrap
-./configure --with-odp=$ODPDIR --enable-cunit --prefix=$ROOTDIR/install
+./configure --with-odp=$ODPDIR --enable-cunit --prefix=$(pwd)/install
 make
 make install
 make check
