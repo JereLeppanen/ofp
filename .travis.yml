@@ -1,1 +1,3 @@
 language: c
+
+script: ./bootstrap && ./configure && make && make check
