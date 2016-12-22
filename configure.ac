@@ -1,4 +1,4 @@
-AC_PREREQ([2.69])
+AC_PREREQ([2.68])
 AC_INIT([OpenFastPath],
 	m4_esyscmd(./scripts/git_hash.sh .),
 	[sorin.vultureanu at enea.com],
