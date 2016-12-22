@@ -13,8 +13,8 @@ install:
     - ./configure --prefix=$(pwd)/install
     - make
     - make install
-    - export CPPFLAGS=-I$(pwd)/install/include:$CPPFLAGS
-    - export LDFLAGS=-L$(pwd)/install/lib:$LDFLAGS
+    - export CPPFLAGS="-I$(pwd)/install/include $CPPFLAGS"
+    - export LDFLAGS="-L$(pwd)/install/lib $LDFLAGS"
     - cd ..
 
 script: ./scripts/devbuild_ofp_odp_linux.sh
