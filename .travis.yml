@@ -3,4 +3,7 @@ language: c
 dist: trusty
 sudo: false
 
+git:
+	depth: 9999999
+
 script: ./bootstrap && ./configure && make && make check
