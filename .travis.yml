@@ -3,4 +3,4 @@ language: c
 dist: trusty
 sudo: false
 
-script: (cat /etc/system-release || autoconf --version) || ./bootstrap && ./configure && make && make check
+script: ./bootstrap && ./configure && make && make check
