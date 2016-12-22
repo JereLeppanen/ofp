@@ -1,3 +1,6 @@
 language: c
 
-script: autoconf --version && ./bootstrap && ./configure && make && make check
+dist: trusty
+sudo: false
+
+script: (cat /etc/system-release || autoconf --version) || ./bootstrap && ./configure && make && make check
