@@ -1,6 +1,4 @@
-#!/bin/bash
-
-set -ex
+#!/bin/bash -ex
 
 export ROOTDIR=$(git rev-parse --show-toplevel)
 
