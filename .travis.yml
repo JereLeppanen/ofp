@@ -17,4 +17,4 @@ install:
     - export LDFLAGS="-L$(pwd)/install/lib $LDFLAGS"
     - cd ..
 
-script: ./scripts/devbuild_ofp_odp_linux.sh
+script: ./scripts/travis.sh
