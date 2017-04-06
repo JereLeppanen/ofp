@@ -8,7 +8,8 @@ cd odp
 ./bootstrap
 ODPDIR=$(pwd)/install
 ./configure --prefix=$ODPDIR
-make install
+echo nproc = $(nproc)
+make -j $(nproc) install
 
 cd $ROOTDIR
 ./bootstrap
