@@ -3,9 +3,8 @@
 ROOTDIR=$(git rev-parse --show-toplevel)
 
 cd $ROOTDIR
-git clone http://git.linaro.org/lng/odp.git
+git clone --depth 1 -b v1.11.0.0_monarch http://git.linaro.org/lng/odp.git
 cd odp
-git checkout tags/v1.11.0.0_monarch
 ./bootstrap
 ODPDIR=$(pwd)/install
 ./configure --prefix=$ODPDIR
