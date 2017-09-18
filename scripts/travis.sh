@@ -14,4 +14,4 @@ cd $ROOTDIR
 ./bootstrap
 ./configure --with-odp=$ODPDIR --enable-cunit --prefix=$(pwd)/install
 make install
-make check
+make check || for log in $(find test -name "*.log"); do echo $log:; cat $log; done || false
