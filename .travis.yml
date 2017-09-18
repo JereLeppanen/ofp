@@ -14,8 +14,3 @@ install:
     - cd ..
 
 script: ./scripts/travis.sh
-
-notifications:
-    email:
-        recipients:
-            - openfastpath@list.openfastpath.org
