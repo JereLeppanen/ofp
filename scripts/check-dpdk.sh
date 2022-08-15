@@ -9,15 +9,15 @@ fi
 cd $(readlink -e $(dirname $0))/..
 
 # Configure hugepages
-sysctl vm.nr_hugepages=1000
-mkdir -p /mnt/huge
-mount -t hugetlbfs nodev /mnt/huge
+sudo sysctl vm.nr_hugepages=1000
+sudo mkdir -p /mnt/huge
+sudo mount -t hugetlbfs nodev /mnt/huge
 
 # Build ODP
 git clone https://github.com/OpenDataPlane/odp-dpdk --branch v1.35.0.0_DPDK_19.11 --depth 1
 pushd odp-dpdk
 ./bootstrap
-./configure --prefix=$(pwd)/install
+./configure --prefix=$(pwd)/install --enable-deprecated --without-tests --without-examples
 make -j${JOBS} install
 popd
 
@@ -27,4 +27,4 @@ popd
 make -j${JOBS} install
 
 # Test OFP
-make check
+sudo make check

@@ -60,17 +60,23 @@ jobs:
       run: find . -name "*.trs" | xargs grep -l '^.test-result. FAIL' | while read trs ; do echo FAILURE detected at $trs; cat ${trs%%.trs}.log ; done
 
   Run_dpdk:
-    runs-on: ubuntu-18.04
-    env:
-      OS: ubuntu_20.04
+    runs-on: ubuntu-20.04
     strategy:
       fail-fast: false
       matrix:
         cc: [gcc, clang]
     steps:
-      - uses: actions/checkout@v2
-      - run: sudo docker run -i -v `pwd`:/ofp --privileged --shm-size 8g -e CC="${{matrix.cc}}" -e ARCH="${ARCH}"
-               -e CXX=g++-10 $CONTAINER_NAMESPACE/odp-ci-${OS}-${ARCH}-dpdk_20.11 /bin/bash -c "apt-get update && apt install g++-10 && /ofp/scripts/check-dpdk.sh"
-      - name: Failure log
-        if: ${{ failure() }}
-        run: find . -name "*.trs" | xargs grep -l '^.test-result. FAIL' | while read trs ; do echo FAILURE detected at $trs; cat ${trs%%.trs}.log ; done
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt install automake autoconf libconfig-dev libcunit1-dev libssl-dev libtool pkg-config
+        sudo apt install dpdk-dev
+    - name: Run
+      run: |
+        less ./scripts/check-dpdk.sh
+        ls -la ./scripts/check-dpdk.sh
+        CC="${{matrix.cc}}" ./scripts/check-dpdk.sh
+    - name: Failure log
+      if: ${{ failure() }}
+      run: find . -name "*.trs" | xargs grep -l '^.test-result. FAIL' | while read trs ; do echo FAILURE detected at $trs; cat ${trs%%.trs}.log ; done
